@@ -19,23 +19,18 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<body class="bg-grey-light">
+<div id="app">
+    <nav class="bg-white section">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center py-1">
+                <h1>
+                    <a class="navbar-brand" href="{{ url('/projects') }}">
+                        <img src="/images/logo.svg" alt="Birdboard" class="relative" style="top: 2px">
+                    </a>
+                </h1>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
+                <div>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -57,7 +52,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -70,11 +65,12 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="container py-4">
-            @yield('content')
-        </main>
-    </div>
+    <main class="container mx-auto py-4 section">
+        @yield('content')
+    </main>
+</div>
 </body>
 </html>
