@@ -10,13 +10,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/projects/{project}', 'ProjectController@show');
     Route::post('/projects', 'ProjectController@store');
 
-
-
     Route::post('/projects/{project}/tasks', 'ProjectTaskController@store');
+    Route::patch('/projects/{project}/tasks/{task}', 'ProjectTaskController@update');
     
     Route::get('/home', 'HomeController@index')->name('home');
 });
-
-
 
 Auth::routes();

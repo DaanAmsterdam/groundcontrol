@@ -5,7 +5,7 @@
         @csrf
 
         <h1 class="heading is-1">Create a Project</h1>
-    
+
         <div class="field">
             <label class="label" for="title">Title</label>
 
