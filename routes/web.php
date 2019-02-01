@@ -4,8 +4,6 @@
 //    return view('welcome');
 //});
 
-
-
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'ProjectController@index');
     Route::get('/projects', 'ProjectController@index');
@@ -17,7 +15,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/projects/{project}/tasks', 'ProjectTaskController@store');
     Route::patch('/projects/{project}/tasks/{task}', 'ProjectTaskController@update');
-    
+
     Route::get('/home', 'HomeController@index')->name('home');
 });
 

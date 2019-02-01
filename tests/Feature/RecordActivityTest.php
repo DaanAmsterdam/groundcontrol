@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Facades\Tests\TestFactories\ProjectFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ActivityFeedTest extends TestCase
+class RecordActivityTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -32,7 +32,7 @@ class ActivityFeedTest extends TestCase
     }
 
     /** @test */
-    public function creating_a_new_task_records_project_activity()
+    public function creating_a_new_task_records_activity()
     {
         $project = ProjectFactory::withTasks(1)->create();
 
@@ -41,7 +41,7 @@ class ActivityFeedTest extends TestCase
     }
 
     /** @test */
-    public function completing_a_new_task_records_project_activity()
+    public function completing_a_task_records_activity()
     {
         $project = ProjectFactory::withTasks(1)->create();
 
@@ -49,5 +49,35 @@ class ActivityFeedTest extends TestCase
 
         $this->assertCount(3, $project->activity);
         $this->assertEquals('completed_task', $project->activity->last()->description);
+    }
+
+    /** @test */
+    public function incompleting_a_task_records_activity()
+    {
+        $project = ProjectFactory::withTasks(1)->create();
+
+        $project->tasks->first()->complete();
+
+        $this->assertCount(3, $project->activity);
+
+        $project->tasks->first()->incomplete();
+
+        $project->refresh();
+
+        $this->assertCount(4, $project->activity);
+        $this->assertEquals('incompleted_task', $project->activity->last()->description);
+    }
+
+    /** @test */
+    public function deleting_a_task_records_activity()
+    {
+        $this->withoutExceptionHandling();
+        $project = ProjectFactory::withTasks(1)->create();
+
+        $project->tasks->first()->delete();
+
+        $this->assertCount(3, $project->activity);
+
+        $this->assertEquals('deleted_task', $project->activity->last()->description);
     }
 }

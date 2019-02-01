@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use App\Project;
-use Illuminate\Http\Request;
 
 class ProjectTaskController extends Controller
 {
@@ -25,9 +24,7 @@ class ProjectTaskController extends Controller
 
         $task->update(request()->validate(['body' => 'required']));
 
-        $method = request('completed') ? 'complete' : 'incomplete';
-
-        $task->$method();
+        request('completed') ? $task->complete() : $task->incomplete();
 
         return redirect($project->path());
     }
